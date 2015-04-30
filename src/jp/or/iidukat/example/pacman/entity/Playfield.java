@@ -485,8 +485,8 @@ public class Playfield extends BaseEntity {
     }
 
     private void createActorElements(String[] names) {
-    	pacman = new Pacman[4];
-    	for(int i = 0;i < 4;i ++){
+    	pacman = new Pacman[2];
+    	for(int i = 0;i < 2;i ++){
     		pacman[i] = new Pacman(
                         getAppearance().getSourceImage(),
                         game, names[i]);

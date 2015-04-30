@@ -24,6 +24,7 @@ public class GooglePacman extends Activity implements OnClickListener {
 	    public static String ownerIP = null;
 	String[] names = { "player1", "player2", "player3", "player4" };
 	private String name;
+	private int index;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,9 +42,8 @@ public class GooglePacman extends Activity implements OnClickListener {
 
 		name = Configure();
 		System.out.println("reach here3");
-		//int a[] = new int[5];
-		//a[10] = 3;
-		PacmanGame game = initGame(names, getIndex(names, name));
+	//	PacmanGame game = initGame(names, getIndex(names, name));
+		PacmanGame game = initGame(names, index);
 		ReceiveTask t = new ReceiveTask(game, mp);
 		Thread recThread = new Thread(t);
 		recThread.start();
@@ -60,35 +60,7 @@ public class GooglePacman extends Activity implements OnClickListener {
 		Log.d("dumbError", "name not in names array");
 		return -1;
 	}
-	private String Configure(){
-		System.out.println("start configure");
-		String my_name = isOwner ? "player1" : "player2";
-	//	String ip1 = "128.237.164.115";
-		String ip1 = "128.237.213.251";
-		String ip2 = "128.237.217.160";
-		String local_ip = DeviceDetailFragment.getLocalIpv4Address();
-		String other_ip = local_ip.compareTo(ip1) == 0 ? ip2 : ip1;
-		String owner_ip = isOwner ? local_ip : other_ip;
-		String guest_ip = isOwner ? other_ip : local_ip;
-		ArrayList<Node> nodes = new ArrayList<Node>();
-		Node n = new Node();
-		n.setName(names[0]);
-		n.setIp(owner_ip);
-		n.setPort(20000);
-		nodes.add(n);
-		n = new Node();
-		n.setName(names[1]);
-		n.setIp(guest_ip);
-		n.setPort(20001);
-		nodes.add(n);
-		mp = new MessagePasser(nodes, names[0], TimeStampType.LOGICAL);
-		Log.d("asd", "dasdsa");
-		System.out.println("owner(player1) " + owner_ip);
-		System.out.println("guest(player2) " + guest_ip);
-		System.out.println("my name" + my_name);
-		return my_name;
-	}
-	private String ConfigureMessagePasser(){
+	private String Configre(){
 		ArrayList<Node> nodes = new ArrayList<Node>();
 		if(isOwner){
 			System.out.println("owner");
@@ -219,4 +191,39 @@ public class GooglePacman extends Activity implements OnClickListener {
 
 	}
 
+	private String Configure(){
+		// player1 = owner
+		// player2 = guest
+		System.out.println("start configure");
+		String ip1 = "128.237.164.115";
+		//String ip1 = "128.237.213.251";
+		String ip2 = "128.237.217.160";
+		String local_ip = DeviceDetailFragment.getLocalIpv4Address();
+		String other_ip = local_ip.compareTo(ip1) == 0 ? ip2 : ip1;
+		String my_name = local_ip.compareTo(ip1) == 0 ? "player1" : "player2";
+		String owner_ip = isOwner ? local_ip : other_ip;
+		String guest_ip = isOwner ? other_ip : local_ip;
+		int port1 = owner_ip.compareTo(ip1) == 0 ? 20000 : 20001;
+		int port2 = port1 == 20000 ? 20001: 20000;
+		this.index = local_ip.compareTo(ip1) == 0  ? 0 : 1;
+		String name1 = "player1";
+		String name2 = "player2";
+		ArrayList<Node> nodes = new ArrayList<Node>();
+		Node n = new Node();
+		n.setName(name1);
+		n.setIp(ip1);
+		n.setPort(20000);
+		nodes.add(n);
+		n = new Node();
+		n.setName(name2);
+		n.setIp(ip2);
+		n.setPort(20000);
+		nodes.add(n);
+		mp = new MessagePasser(nodes, my_name, TimeStampType.LOGICAL);
+		Log.d("asd", "dasdsa");
+		System.out.println("owner(player1) " + owner_ip + " " +port1);
+		System.out.println("guest(player2) " + guest_ip +" " + port2);
+		System.out.println("my name " + my_name + "my index " + index);
+		return my_name;
+	}
 }

@@ -827,7 +827,7 @@ public class PacmanGame {
 	}
 
 	private void restartActors() {
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 2; i++)
 			getPacman()[i].arrange();
 
 		for (PlayfieldActor ghost : getGhosts())
@@ -864,7 +864,7 @@ public class PacmanGame {
 		float cy = y - offset[0];
 
 		Pacman[] pacman = getPacman();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 2; i++) {
 			if (i == ownerIndex) {
 				float px = pacman[i].getFieldX() + 48;
 				float py = pacman[i].getFieldY() + 32;
@@ -938,7 +938,7 @@ public class PacmanGame {
 		float absDx = Math.abs(touchDX);
 		float absDy = Math.abs(touchDY);
 		Pacman[] pacman = getPacman();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 2; i++) {
 			if (absDx < 8 && absDy < 8) {
 				canvasClicked(touchStartX, touchStartY);
 			} else if (absDx > 15 && absDy < absDx * 2 / 3) {
@@ -1111,7 +1111,7 @@ public class PacmanGame {
 			}
 
 			Pacman[] pacman = getPacman();
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 2; i++) {
 				pacman[i].setFullSpeed(currentPlayerSpeed);
 				pacman[i].setDotEatingSpeed(currentDotEatingSpeed);
 				pacman[i].setTunnelSpeed(currentPlayerSpeed);
@@ -1216,7 +1216,7 @@ public class PacmanGame {
 	}
 
 	private void moveActors() {
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 2; i++)
 			getPacman()[i].move();
 		Ghost[] ghosts = getGhosts();
 		for (PlayfieldActor actor : ghosts) {
@@ -1241,7 +1241,7 @@ public class PacmanGame {
 		Pacman[] pacman = getPacman();
 		Ghost[] ghosts = getGhosts();
 		for (int i = 0; i < 1; i++) {
-			for (int j = 0; j < 4; j++) {
+			for (int j = 0; j < 2; j++) {
 				if (ghosts[i].getTilePos()[0] == pacman[j].getTilePos()[0]
 						&& ghosts[i].getTilePos()[1] == pacman[j].getTilePos()[1]) {
 					if (ghosts[i].getMode() == GhostMode.FRIGHTENED) {
@@ -1313,7 +1313,7 @@ public class PacmanGame {
 	private void changeGameplayMode(GameplayMode mode) {
 		gameplayMode = mode;
 		if (mode != GameplayMode.CUTSCENE) {
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 2; i++)
 				getPacman()[i].updateAppearance();
 
 			Ghost[] ghosts = getGhosts();
@@ -1469,7 +1469,7 @@ public class PacmanGame {
 	}
 
 	private void updateActorPositions() {
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 2; i++)
 			getPacman()[i].updateElPos();
 		Ghost[] ghosts = getGhosts();
 		for (PlayfieldActor actor : ghosts) {
@@ -1495,7 +1495,7 @@ public class PacmanGame {
 			switch (gameplayMode) {
 			case PLAYER_DYING:
 			case PLAYER_DIED:
-				for (int i = 0; i < 4; i++)
+				for (int i = 0; i < 2; i++)
 					getPacman()[i].updateAppearance();
 				Ghost[] ghosts = getGhosts();
 				for (PlayfieldActor actor : ghosts) {
@@ -2146,7 +2146,7 @@ public class PacmanGame {
 		Pacman tmp = null;
 		if (m == null)
 			return;
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 2; i++)
 			if (playerName.compareTo(m[i].getName()) == 0) {
 				tmp = m[i];
 				break;

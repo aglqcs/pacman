@@ -165,7 +165,6 @@ public class MessagePasser {
 			else{
 				System.out.println("use old socket");
 			}
-			System.out.println("should not get here ");
 			ObjectOutputStream oos = destNode.getObjectOutputStream();
 			oos.writeObject(timeMessage);
 			if (n != null) {
