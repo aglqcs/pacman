@@ -55,7 +55,7 @@ public class MessagePasser {
 
 		File file = new File(ConfigFile);
 		ModifiedTime = file.lastModified();
-		parseConfigFile(file, true);
+		//parseConfigFile(file, true);
 		this.MulitcastReceiveBuffer = new LinkedHashMap<Group, ArrayList<MulticastAckCountHelper>>();
 		for (Group g : groups)
 			this.MulitcastReceiveBuffer.put(g,
@@ -108,12 +108,14 @@ public class MessagePasser {
 		}
 		for (int i = 0; i < nodes.size(); i++) {
 			Node n = nodes.get(i);
+			System.out.println(nodes.size() + " " + n.getName() +" "+ n.getPort() +" " + this.Name);
 			if (n.getName().compareTo(this.Name) == 0) {
 				if (type == TimeStampType.VECTOR)
 					timeStamp.setIndex(i);
 				ListenerThread listener = new ListenerThread(n.getPort(), this);
 				Thread t = new Thread(listener);
 				t.start();
+				System.out.println("Message passer start thread listening for " + n.getName() + " " +n.getPort());
 				break;
 			}
 		}
@@ -129,7 +131,7 @@ public class MessagePasser {
 		timeMessage.setTimeStamp(timeStamp);
 
 		// Check if config file has changed
-		CheckConfig();
+		//CheckConfig();
 		Node destNode = getDestNode(timeMessage);
 		try {
 			if (destNode == null)
@@ -155,9 +157,15 @@ public class MessagePasser {
 				}
 			}
 			if (destNode.getSocket() == null) {
+				System.out.println("This is first time, trying to create socket " + destNode.getName() + " " + destNode.getIp() + " " + destNode.getPort());
 				Socket s = new Socket(destNode.getIp(), destNode.getPort());
+				System.out.println("create socket return");
 				destNode.setSocket(s);
 			}
+			else{
+				System.out.println("use old socket");
+			}
+			System.out.println("should not get here ");
 			ObjectOutputStream oos = destNode.getObjectOutputStream();
 			oos.writeObject(timeMessage);
 			if (n != null) {
@@ -176,15 +184,16 @@ public class MessagePasser {
 			}
 		} catch (Exception e) {
 			Log.d(((PosInfo)timeMessage.getData()).player, "err");
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
+		System.out.println("exiting send()");
 	}
 
 	public TimeStampedMessage receive() {
 
 		// Check if config file has changed
 
-		CheckConfig();
+//		CheckConfig();
 
 		TimeStampedMessage m = MessageReceivedQueue.poll();
 
@@ -251,7 +260,7 @@ public class MessagePasser {
 		if (ModifiedTime < file.lastModified()) {
 			ModifiedTime = file.lastModified();
 			// do update
-			parseConfigFile(file, false);
+			//parseConfigFile(file, false);
 		}
 	}
 

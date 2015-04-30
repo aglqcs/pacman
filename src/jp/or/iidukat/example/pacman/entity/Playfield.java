@@ -63,6 +63,7 @@ public class Playfield extends BaseEntity {
         Path.createHorizontalPath(5, 4, 5),
         Path.createVerticalPath(5, 1, 4),
         Path.createVerticalPath(9, 1, 12),
+        Path.createVerticalPath(14, 1, 12),//added
         Path.createVerticalPath(5, 12, 4),
         Path.createVerticalPath(10, 12, 4),
         Path.createHorizontalPath(5, 15, 16),
@@ -71,17 +72,20 @@ public class Playfield extends BaseEntity {
         Path.createVerticalPath(54, 1, 4),
         Path.createVerticalPath(19, 1, 12),
         Path.createHorizontalPath(19, 4, 26),
-        Path.createHorizontalPath(13, 5, 7),
-        Path.createVerticalPath(13, 5, 4),
-        Path.createHorizontalPath(13, 8, 3),
-        Path.createVerticalPath(56, 4, 9),
+        Path.createHorizontalPath(19, 8, 16),
+        //Path.createHorizontalPath(13, 5, 7),
+        //Path.createVerticalPath(13, 5, 4),
+        //Path.createHorizontalPath(13, 8, 3),
+        Path.createVerticalPath(55, 4, 9),//modified
         Path.createHorizontalPath(48, 4, 13),
         Path.createVerticalPath(48, 1, 12),
         Path.createVerticalPath(60, 12, 4),
+        Path.createVerticalPath(60, 12, 4),
+        Path.createVerticalPath(44, 1, 15),
         Path.createHorizontalPath(44, 15, 17),
         Path.createVerticalPath(54, 12, 4),
         Path.createHorizontalPath(44, 12, 17),
-        Path.createVerticalPath(44, 1, 15),
+        Path.createVerticalPath(44, 1, 15),//added
         Path.createHorizontalPath(41, 13, 4),
         Path.createVerticalPath(41, 13, 3),
         Path.createVerticalPath(38, 13, 3),
@@ -92,17 +96,19 @@ public class Playfield extends BaseEntity {
         Path.createVerticalPath(21, 12, 4),
         Path.createVerticalPath(24, 12, 4),
         Path.createHorizontalPath(24, 15, 12),
-        Path.createVerticalPath(27, 4, 9),
-        Path.createHorizontalPath(52, 9, 5),
+        //Path.createVerticalPath(27, 4, 9),
+        //Path.createHorizontalPath(27, 8, 26),//added
+        Path.createHorizontalPath(51, 8, 5),//modified
+        Path.createVerticalPath(51, 7, 3),//added
         Path.createTunnelPath(56, 8, 10),
         Path.createTunnelPath(1, 8, 9),
     };
 
     private static final Path[] PATHS_HAVING_NO_DOT = {
         Path.createHorizontalPath(1, 8, 8),
-        Path.createHorizontalPath(57, 8, 9),
-        Path.createVerticalPath(44, 2, 10),
-        Path.createVerticalPath(35, 5, 7),
+        Path.createHorizontalPath(56, 8, 10),
+        //Path.createVerticalPath(44, 2, 10),
+        //Path.createVerticalPath(35, 5, 7),
         Path.createHorizontalPath(36, 4, 8),
         Path.createHorizontalPath(36, 10, 8),
         Path.createHorizontalPath(39, 15, 2),

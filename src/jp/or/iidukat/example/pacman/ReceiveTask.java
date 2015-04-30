@@ -16,8 +16,10 @@ public class ReceiveTask implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("start run (listening)");
 		Message m;
 		for (;;) {
+			System.out.println("trying to get a message");
 			m = passer.receive();
 			Log.d("recTask", "message received");
 			PosInfo pi = (PosInfo)m.getData();

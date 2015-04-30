@@ -68,6 +68,7 @@ public class PeerFinderActivity extends Activity implements ChannelListener, Dev
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
      
+        System.out.println("DEBUG: oncreate peer find");
         setContentView(R.layout.peer_finding);
 
         // add necessary intent values to be matched.
@@ -85,6 +86,8 @@ public class PeerFinderActivity extends Activity implements ChannelListener, Dev
     @Override
     public void onResume() {
         super.onResume();
+        System.out.println("DEBUG: onResume peer find");
+
         receiver = new WifiBroadcastManager(manager, channel, this);
         registerReceiver(receiver, intentFilter);
     }
@@ -178,6 +181,7 @@ public class PeerFinderActivity extends Activity implements ChannelListener, Dev
 
     @Override
     public void connect(WifiP2pConfig config) {
+    	System.out.println("connection to peers...");
         manager.connect(channel, config, new ActionListener() {
         	
             @Override

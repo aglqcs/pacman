@@ -31,12 +31,15 @@ public class Message implements Serializable {
 	private String groupName;
 
 	public Message(String dest, String kind, Object data) {
+		System.out.println("sss");
+
 		this.setDestination(dest);
 		this.setKind(kind);
 		this.setData(data);
 		this.setDuplicate(false);
 		noRecvDelay = false;
 		setGroupMsg(false);
+		System.out.println("sss");
 	}
 
 	public Message(Message m) {

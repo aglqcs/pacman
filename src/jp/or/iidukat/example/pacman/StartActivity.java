@@ -22,8 +22,8 @@ public class StartActivity extends Activity implements OnClickListener{
 	        
 			AlertDialog.Builder builder = new AlertDialog.Builder(StartActivity.this);
 			builder.setTitle("Choose start mode: ")
-				   .setMessage("Do you want to host a new game?\n **Yes: host a game and invite others to play\n"
-					+ " No: enter as a guest and wait for others invitation**");
+				   .setMessage("Do you want to host a new game?\n **Yes: host a game and invite others to play**\n"
+					+ " **No: enter as a guest and wait for others invitation**");
 			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		                public void onClick(DialogInterface dialog, int which) {
 		                   //go to host mode, allow inviting

@@ -886,6 +886,7 @@ public class PacmanGame {
 				Log.d("sending", names[i]);
 				m.setDestination(names[i]);
 				mp.send(m);
+				Log.d("sending","send return");
 			}
 	}
 
@@ -1634,6 +1635,7 @@ public class PacmanGame {
 
 	void tick() {
 		long now = new Date().getTime();
+		//System.out.println("in tick" + now);
 		if (paused) {
 			pausedTime = now;
 			return;

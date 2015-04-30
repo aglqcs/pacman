@@ -79,12 +79,13 @@ public class WifiBroadcastManager extends BroadcastReceiver {
                     .getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
 
             if (networkInfo.isConnected()) {
-
+            	System.out.println("(WIFI)Receive a connection, connected successfully!");
                 // we are connected with the other device, request connection
                 // info to find group owner IP
 
                 DeviceDetailFragment fragment = (DeviceDetailFragment) activity
                         .getFragmentManager().findFragmentById(R.id.frag_detail);
+                System.out.println("here in wifi connection");
                 manager.requestConnectionInfo(channel, fragment);
             } else {
                 // It's a disconnect

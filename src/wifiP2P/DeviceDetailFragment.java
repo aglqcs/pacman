@@ -57,12 +57,14 @@ import android.widget.Toast;
 
      @Override
      public void onActivityCreated(Bundle savedInstanceState) {
+    	 System.out.println("detail on create start");
          super.onActivityCreated(savedInstanceState);
+         System.out.println("detail on create exit");
      }
 
      @Override
      public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    	 System.out.println("on create view device detail");
          mContentView = inflater.inflate(R.layout.device_detail, null);
          mContentView.findViewById(R.id.btn_connect).setOnClickListener(new View.OnClickListener() {
 
@@ -123,8 +125,7 @@ import android.widget.Toast;
 
      @Override
      public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	 Intent startGame = new Intent(getActivity(), GooglePacman.class);
-    	 getActivity().startService(startGame);
+    	 
          // User has picked an image. Transfer it to group owner i.e peer using
          // FileTransferService.
          /*Uri uri = data.getData();
@@ -150,7 +151,7 @@ import android.widget.Toast;
     	                List<InetAddress>  ialist = Collections.list(ni.getInetAddresses());
     	                if(ialist.size()>0){
     	                    for (InetAddress address: ialist){
-    	                        if (!address.isLoopbackAddress() && InetAddressUtils.isIPv4Address(ipv4=address.getHostAddress())){ 
+    	                        if (!address.isLoopbackAddress() && InetAddressUtils.isIPv4Address(ipv4=address.getHostAddress()) && !address.getHostAddress().startsWith("192.168.")){ 
     	                            return ipv4;
     	                        }
     	                    }
@@ -171,16 +172,23 @@ import android.widget.Toast;
              progressDialog.dismiss();
          }
          this.info = info;
+         System.out.println("set pacman parameters ");
+
          this.getView().setVisibility(View.VISIBLE);
+         System.out.println("set pacman parameters ");
          if(info.isGroupOwner){
-        	 ownerIP = info.groupOwnerAddress.getHostAddress();
+        	 GooglePacman.isOwner = true;
+        	 
          }
          else{
-        	 ownerIP = info.groupOwnerAddress.getHostAddress();
-        	 if((otherIP = DeviceDetailFragment.getLocalIpv4Address())==null){
-        		 System.out.print("emply local IP\n");
-        	 }
+        	 GooglePacman.isOwner = false;
          }
+         
+         GooglePacman.ownerIP = info.groupOwnerAddress.getHostAddress();
+         System.out.println("owner is" + GooglePacman.ownerIP);
+         System.out.println("my is " + DeviceDetailFragment.getLocalIpv4Address());
+         Intent startGame = new Intent(getActivity(), GooglePacman.class);
+    	 startActivity(startGame);
         /* // The owner IP is now known.
          TextView view = (TextView) mContentView.findViewById(R.id.group_owner);
          view.setText(getResources().getString(R.string.group_owner_text)

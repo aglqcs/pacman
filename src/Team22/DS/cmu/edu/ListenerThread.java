@@ -30,9 +30,10 @@ public class ListenerThread implements Runnable {
 		ServerSocket listener = null;
 		try {
 			listener = new ServerSocket(ListenPort);
-			
+			System.out.println("listening on port " + ListenPort);
 			while (true) {
 				Socket socket = listener.accept();
+				System.out.println("get a socket from " + socket.getInetAddress() + " " + socket.getPort());
 				CommunicationThread ct = new CommunicationThread(socket, Passer);
 				Thread t = new Thread(ct);
 				t.start();
